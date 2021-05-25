@@ -2,7 +2,7 @@
 
 ## Primary Objective
 
-To develop a website generator which does not use any javascript (or as less javascript as possible).
+To develop a website generator independent of any unnecessary javascript, ads and trackers.
 
 ## Inspiration
 
