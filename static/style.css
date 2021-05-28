@@ -7,6 +7,14 @@
   --highlight: #2749c9;
 }
 
+@media (prefers-color-scheme: dark) {
+  * {
+    --txtcolor: #dadada;
+    --bgcolor: #141414;
+    --highlight: #ffc400;
+  }
+}
+
 body {
   margin: auto;
   font-size: 18px;
@@ -25,7 +33,7 @@ header {
   align-items: baseline;
 }
 
-h1 {
+header h1 {
   font-size: 3em;
   text-align: center;
   justify-content: center;
@@ -33,7 +41,7 @@ h1 {
 
 a {
   text-decoration: none;
-  color: var(--txtcolor);
+  color: var(--highlight);
 }
 
 a:hover {
@@ -67,15 +75,4 @@ hr {
   background: currentColor;
   opacity: 0.1;
   margin: 1.2em 0;
-}
-
-code,
-textarea {
-  font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
-  font-size: 1em;
-  opacity: 0.7;
-}
-
-a code {
-  opacity: 1;
 }

@@ -16,6 +16,8 @@ def parse_args():
     if not os.path.exists(args.markdown):
         raise FileNotFoundError('File {} not found'.format(args.markdown))
         sys.exit(1)
+    if args.output == None:
+        return args
     if os.path.exists(args.output + '.html'):
         print('{} already exists. Overwritting...'.format(args.output))
 
@@ -34,7 +36,8 @@ def make_html(markdown, output):
 
 def run():
     args = parse_args()
-    make_html(args.markdown, args.output)
+    output = args.output if args.output != None else 'Website'
+    make_html(args.markdown, output)
 
 if __name__ == '__main__':
     run()
