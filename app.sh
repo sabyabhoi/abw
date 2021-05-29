@@ -1,21 +1,43 @@
 #!/bin/sh
 
 if [[ -z $1 ]]; then
-	echo "Usage: $0 <markdown file> <template file>"
-	exit
+	echo "Usage: $0 <markdown file> <template file> [--css] [--html]"
 fi
 
-TITLE=$(sed 's/# //; 1q' $1)
+for arg in "$@"; do
+	case $arg in
+		-h|--help)
+			echo "Usage: $0 <markdown file> <template file> [--css] [--html]"
+			;;
+		--css)
+			echo "Fetching css file from github..."
+			curl "https://raw.githubusercontent.com/sabyabhoi/abw/main/style.css" -o style.css
+			;;
+		--html)
+			echo "Fetching html file from github..."
+			curl "https://raw.githubusercontent.com/sabyabhoi/abw/main/template.html" -o template.html
+			;;
+		*)
+			if [[ -z $1 ]]; then
+				echo "Usage: $0 <markdown file> <template file> [--css]"
+				exit
+			fi
 
-TEMP="${2:-template.html}"
+			TITLE=$(sed 's/# //; 1q' $1)
 
-if [[ ! -e $TEMP ]]; then
-	echo "$TEMP does not exist. Getting it from github..."
-	curl "https://raw.githubusercontent.com/sabyabhoi/abw/main/template.html"
-fi
+			TEMP="${2:-template.html}"
 
-sed -e 's|{0}|'"$TITLE"'|g' $TEMP | head -n -2
+			if [[ ! -e $TEMP ]]; then
+				echo "$TEMP does not exist. Getting it from github..."
+				curl "https://raw.githubusercontent.com/sabyabhoi/abw/main/template.html" -o template.html
+			fi
 
-tail -n +2 $1 | markdown
+			sed -e 's|{0}|'"$TITLE"'|g' $TEMP | head -n -2
 
-echo "</body></html>"
+			tail -n +2 $1 | markdown
+
+			echo "</body></html>"
+			;;
+	esac
+done
+

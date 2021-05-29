@@ -14,5 +14,10 @@ To develop a website generator independent of any unnecessary javascript, ads an
 
 ### How to run this
 
-- Run `./app.py -h` to get all the help displayed.
+- Run `./app.sh ` to get all the help displayed.
 - To view the website locally, navigate to the directory containing the output file and run `python -m http.server`
+
+## Screenshots
+
+![light mode](./screenshots/lightmode.png "light mode")
+![dark mode](./screenshots/darkmode.png "dark mode")
